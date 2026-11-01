@@ -1,0 +1,36 @@
+{
+  "eventos": [
+    {
+      "id": "1",
+      "titulo": "Introdução ao Git e GitHub",
+      "descricao": "Oficina prática de versionamento para calouros.",
+      "data": "2026-11-10",
+      "local": "Laboratório 3",
+      "categoria": "Workshop"
+    },
+    {
+      "id": "2",
+      "titulo": "Carreira em Desenvolvimento Web",
+      "descricao": "Bate-papo com egressos que atuam no mercado.",
+      "data": "2026-11-18",
+      "local": "Auditório",
+      "categoria": "Palestra"
+    },
+    {
+      "id": "3",
+      "titulo": "Hackathon de Acessibilidade Digital",
+      "descricao": "24 horas para criar soluções web acessíveis.",
+      "data": "2026-12-05",
+      "local": "Bloco de Computação",
+      "categoria": "Hackathon"
+    },
+    {
+      "id": "4",
+      "titulo": "Testes Automatizados no Front-end",
+      "descricao": "Minicurso de 8h sobre testes de componentes.",
+      "data": "2027-03-15",
+      "local": "Laboratório 1",
+      "categoria": "Minicurso"
+    }
+  ]
+}
