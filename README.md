@@ -14,7 +14,7 @@ A apresentação de 120 minutos e a condução das atividades estão divididas i
 | :--- | :--- | :--- |
 | **Marcelly Almeida** | Abertura (10 min) e Fundamentos - Parte 1 (30 min) | 40 min |
 | **Gabriel Barbosa** | Fundamentos - Parte 2 (20 min) e Live Coding (20 min) | 40 min |
-| **Marcelle Luna** | Oficina Prática (25 min) e Fechamento (15 min) | 40 min |
+| **Marcelle Luna** | Oficina Prática (45 min) e Fechamento (15 min) | 60 min |
 
 > **Nota:** Durante a oficina prática (45 min), todos os integrantes atuam prestando suporte direto às duplas.
 
