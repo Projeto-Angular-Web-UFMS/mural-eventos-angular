@@ -1,0 +1,10 @@
+<article class="card">
+  <h2>
+    <a [routerLink]="['/eventos', event().id]">{{ event().titulo }}</a>
+  </h2>
+  <span class="badge">{{ event().categoria }}</span>
+  <p>
+    <time [attr.datetime]="event().data">{{ event().data | date: 'dd/MM/yyyy' }}</time>
+  </p>
+  <p>{{ event().local }}</p>
+</article>
