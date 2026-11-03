@@ -12,6 +12,10 @@ export class EventService {
     return this.http.get<CourseEvent[]>(this.apiUrl);
   }
 
+  get(id: string): Observable<CourseEvent> {
+    return this.http.get<CourseEvent>(`${this.apiUrl}/${id}`);
+  }
+
   create(event: Omit<CourseEvent, 'id'>): Observable<CourseEvent> {
     return this.http.post<CourseEvent>(this.apiUrl, event);
   }

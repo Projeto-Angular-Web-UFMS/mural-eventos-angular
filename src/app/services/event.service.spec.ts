@@ -47,4 +47,12 @@ describe('EventService', () => {
     expect(request.request.method).toBe('POST');
     expect(request.request.body).toEqual(newEvent);
   });
+
+  it('should get one event with GET /eventos/:id', () => {
+    service.get('3').subscribe();
+    const request = httpTesting.expectOne('http://localhost:3000/eventos/3');
+    request.flush({});
+
+    expect(request.request.method).toBe('GET');
+  });
 });

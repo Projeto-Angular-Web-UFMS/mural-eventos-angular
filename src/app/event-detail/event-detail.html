@@ -1,1 +1,38 @@
-<p>event-detail works!</p>
+@switch (status()) {
+  @case ('loading') {
+    <p class="message" role="status">Carregando evento…</p>
+  }
+  @case ('not-found') {
+    <div class="message">
+      <h1>Evento não encontrado</h1>
+      <p>O evento procurado não existe ou foi removido.</p>
+      <a routerLink="/">Voltar para a lista de eventos</a>
+    </div>
+  }
+  @case ('error') {
+    <div class="message message-error" role="alert">
+      <p>Não foi possível carregar o evento. Verifique se a API está rodando e tente novamente.</p>
+      <a routerLink="/">Voltar para a lista de eventos</a>
+    </div>
+  }
+  @case ('found') {
+    @if (event(); as event) {
+      <article class="details">
+        <span class="badge">{{ event.categoria }}</span>
+        <h1>{{ event.titulo }}</h1>
+        @if (event.descricao) {
+          <p>{{ event.descricao }}</p>
+        }
+        <dl class="info">
+          <dt>Data</dt>
+          <dd>
+            <time [attr.datetime]="event.data">{{ event.data | date: 'dd/MM/yyyy' }}</time>
+          </dd>
+          <dt>Local</dt>
+          <dd>{{ event.local }}</dd>
+        </dl>
+        <a routerLink="/" class="button button-secondary">Voltar</a>
+      </article>
+    }
+  }
+}
