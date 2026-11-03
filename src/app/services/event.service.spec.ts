@@ -31,4 +31,20 @@ describe('EventService', () => {
     expect(request.request.method).toBe('GET');
     expect(result).toEqual(events);
   });
+
+  it('should create an event with POST /eventos', () => {
+    const newEvent: Omit<CourseEvent, 'id'> = {
+      titulo: 'Angular Signals',
+      data: '2027-01-20',
+      local: 'Auditório',
+      categoria: 'Palestra',
+    };
+
+    service.create(newEvent).subscribe();
+    const request = httpTesting.expectOne('http://localhost:3000/eventos');
+    request.flush({ id: '5', ...newEvent });
+
+    expect(request.request.method).toBe('POST');
+    expect(request.request.body).toEqual(newEvent);
+  });
 });
