@@ -33,4 +33,17 @@ describe('EventCard', () => {
     const link = (fixture.nativeElement as HTMLElement).querySelector('h2 a');
     expect(link?.getAttribute('href')).toBe('/eventos/1');
   });
+
+  it('should toggle the interest button text', async () => {
+    const button = (fixture.nativeElement as HTMLElement).querySelector('button')!;
+    expect(button.textContent?.trim()).toBe('Tenho interesse');
+
+    button.click();
+    await fixture.whenStable();
+    expect(button.textContent?.trim()).toBe('Remover interesse');
+
+    button.click();
+    await fixture.whenStable();
+    expect(button.textContent?.trim()).toBe('Tenho interesse');
+  });
 });

@@ -1,9 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
+import { ApplicationRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { Observable, of, throwError } from 'rxjs';
 import { CourseEvent } from '../models/course-event';
 import { EventService } from '../services/event.service';
+import { InterestService } from '../services/interest.service';
 import { EventDetail } from './event-detail';
 
 const event: CourseEvent = {
@@ -36,6 +38,17 @@ describe('EventDetail', () => {
     expect(element.querySelector('time')?.textContent).toBe('10/11/2026');
     expect(element.textContent).toContain('Laboratório 3');
     expect(element.querySelector('a[href="/"]')?.textContent).toContain('Voltar');
+  });
+
+  it('should toggle the interest from the detail page', async () => {
+    const element = await setup(() => of(event));
+    const button = element.querySelector('button')!;
+
+    button.click();
+    await TestBed.inject(ApplicationRef).whenStable();
+
+    expect(TestBed.inject(InterestService).hasInterest('1')).toBe(true);
+    expect(button.textContent?.trim()).toBe('Remover interesse');
   });
 
   it('should show "Evento não encontrado" on a 404', async () => {

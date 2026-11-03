@@ -4,6 +4,7 @@ import { Component, OnInit, inject, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CourseEvent } from '../models/course-event';
 import { EventService } from '../services/event.service';
+import { InterestService } from '../services/interest.service';
 
 type DetailStatus = 'loading' | 'found' | 'not-found' | 'error';
 
@@ -15,6 +16,7 @@ type DetailStatus = 'loading' | 'found' | 'not-found' | 'error';
 })
 export class EventDetail implements OnInit {
   private readonly eventService = inject(EventService);
+  protected readonly interests = inject(InterestService);
 
   readonly id = input.required<string>();
 

@@ -12,3 +12,9 @@
 .info dd {
   margin: 0;
 }
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
