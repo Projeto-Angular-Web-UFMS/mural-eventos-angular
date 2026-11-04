@@ -12,8 +12,8 @@ A apresentação tem 120 minutos, seguindo o cronograma do seminário: Abertura 
 
 | Integrante | Blocos Conduzidos | Tempo Conduzido |
 | :--- | :--- | :--- |
-| **Marcelly Almeida** | Abertura (10 min) e Fundamentos - Parte 1 (15 min) | 25 min |
-| **Gabriel Barbosa** | Fundamentos - Parte 2 (15 min) e Live Coding (20 min) | 35 min |
+| **Marcelly Almeida** | Abertura (10 min) e Fundamentos - Parte 1 (30 min) | 40 min |
+| **Gabriel Barbosa** | Fundamentos - Parte 2 (20 min) e Live Coding (20 min) | 40 min |
 | **Marcelle Luna** | Oficina Prática (45 min) e Fechamento (15 min) | 60 min |
 
 > **Nota:** Durante a oficina prática (45 min), todos os integrantes atuam prestando suporte direto às duplas.
