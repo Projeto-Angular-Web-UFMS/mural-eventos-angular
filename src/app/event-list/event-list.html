@@ -1,0 +1,49 @@
+<div class="page-title">
+  <h1>Eventos do curso</h1>
+  <a routerLink="/eventos/novo" class="button">Cadastrar evento</a>
+</div>
+
+<div class="filters">
+  <div class="field">
+    <label for="search">Buscar por título</label>
+    <input
+      id="search"
+      type="search"
+      #searchInput
+      [value]="search()"
+      (input)="search.set(searchInput.value)"
+    />
+  </div>
+
+  <div class="field">
+    <label for="category">Categoria</label>
+    <select
+      id="category"
+      #categorySelect
+      [value]="category()"
+      (change)="category.set(categorySelect.value)"
+    >
+      <option value="">Todas</option>
+      @for (item of categories; track item) {
+        <option [value]="item">{{ item }}</option>
+      }
+    </select>
+  </div>
+</div>
+
+@if (loading()) {
+  <p class="message" role="status">Carregando eventos…</p>
+} @else if (loadError()) {
+  <p class="message message-error" role="alert">
+    Não foi possível carregar os eventos. Verifique se a API está rodando (npm run api) e recarregue
+    a página.
+  </p>
+} @else {
+  <div class="grid">
+    @for (event of filteredEvents(); track event.id) {
+      <app-event-card [event]="event" />
+    } @empty {
+      <p class="message">Nenhum evento encontrado</p>
+    }
+  </div>
+}

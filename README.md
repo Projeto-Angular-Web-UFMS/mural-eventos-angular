@@ -8,7 +8,7 @@ O objetivo deste projeto é demonstrar a arquitetura opinativa do Angular, o uso
 
 ## 👥 Integrantes e Divisão do Seminário
 
-A apresentação de 120 minutos e a condução das atividades estão divididas igualmente entre os membros do grupo (40 minutos para cada integrante):
+A apresentação tem 120 minutos, seguindo o cronograma do seminário: Abertura (10 min), Fundamentos (30 min), Live Coding (20 min), Oficina Prática (45 min) e Fechamento (15 min). Todos os integrantes conduzem ao menos um bloco:
 
 | Integrante | Blocos Conduzidos | Tempo Conduzido |
 | :--- | :--- | :--- |
@@ -17,6 +17,18 @@ A apresentação de 120 minutos e a condução das atividades estão divididas i
 | **Marcelle Luna** | Oficina Prática (45 min) e Fechamento (15 min) | 60 min |
 
 > **Nota:** Durante a oficina prática (45 min), todos os integrantes atuam prestando suporte direto às duplas.
+
+---
+
+## ✅ Funcionalidades
+
+| Requisito | Rota | O que faz |
+| :--- | :--- | :--- |
+| **RF1** — Listar eventos | `/` | Cards ordenados pela data mais próxima, com estados de carregamento e erro |
+| **RF2** — Filtrar e buscar | `/` | Busca pelo título e filtro por categoria, combinados, sem nova requisição à API |
+| **RF3** — Cadastrar evento | `/eventos/novo` | Formulário reativo com validadores, incluindo o validador personalizado de data futura |
+| **RF4** — Ver detalhe | `/eventos/:id` | Dados completos do evento, com "Evento não encontrado" para ids inexistentes |
+| **RF5** — Marcar interesse | cards, detalhe e cabeçalho | Estado global em um serviço com `signal`, exibido em "Meus interesses: N" |
 
 ---
 
@@ -76,21 +88,35 @@ Como o CLI está instalado no projeto, use `npm start`, `npm run ...` ou `npx ng
 
 ---
 
+## 🧯 Problemas Comuns
+
+* **Porta 3000 ou 4200 ocupada:** encerre o processo que a usa ou rode o app em outra porta com `npm start -- --port 4300`.
+* **Erro de versão do Node (`EBADENGINE` ou falha no `npm install`):** confira com `node -v`; o Angular 22 exige `22.22.3+`, `24.15+` ou `26.x`.
+* **Tela com "Não foi possível carregar os eventos":** confirme que `npm run api` está rodando e que `http://localhost:3000/eventos` retorna JSON.
+* **Eventos de teste acumulados na lista:** pare a API e rode `npm run api:reset` para voltar aos 4 eventos originais.
+
+---
+
 ## 🌿 Estrutura de Branches e Checkpoints
 
-O repositório está organizado em branches para guiar a oficina prática:
+O repositório está organizado em branches para guiar a oficina prática. Cada checkpoint contém a solução **acumulada** até aquele ponto:
 
-* `main`: Solução final completa com todos os requisitos (RF1 a RF5).
-* `live-coding`: Ponto de partida para a demonstração ao vivo (RF1 e RF2).
-* `start`: **Base da oficina prática** para a turma (RF1 e RF2 prontos, componentes de RF3 a RF5 criados).
-* `checkpoint-1`: Solução do Formulário Reativo de Cadastro (RF3).
-* `checkpoint-2`: Solução da Página de Detalhe com Rota Dinâmica (RF4).
-* `checkpoint-3`: Solução do Gerenciamento de Interesses com Signal Global (RF5).
+| Branch | Conteúdo |
+| :--- | :--- |
+| `main` | Solução final completa (RF1 a RF5) |
+| `live-coding` | Ponto de partida do live coding: projeto limpo, com cabeçalho, rotas vazias e CSS global |
+| `start` | **Base da oficina prática**: RF1 e RF2 prontos, componentes de RF3 a RF5 criados e vazios |
+| `checkpoint-1` | RF3 concluído (formulário de cadastro) |
+| `checkpoint-2` | RF3 e RF4 concluídos (página de detalhe) |
+| `checkpoint-3` | RF3, RF4 e RF5 concluídos (interesses com signal global) |
 
-Para alternar para a branch inicial da oficina, utilize:
+Para começar a oficina, ou para retomar a partir de um checkpoint se ficar travado:
 ```bash
 git checkout start
+git checkout checkpoint-1
 ```
+
+> Se você tiver alterações locais, salve-as antes de trocar de branch (`git stash`) ou descarte-as (`git restore .`).
 
 ---
 
@@ -105,9 +131,20 @@ mural-eventos-angular/
 ├── public/                # arquivos estáticos (favicon)
 ├── src/
 │   ├── app/
+│   │   ├── event-card/            # card de um evento (input.required)
+│   │   ├── event-detail/          # página de detalhe (RF4)
+│   │   ├── event-form/            # formulário de cadastro (RF3)
+│   │   ├── event-list/            # lista, busca e filtro (RF1 e RF2)
+│   │   ├── models/
+│   │   │   └── course-event.ts    # interface CourseEvent e categorias
+│   │   ├── services/
+│   │   │   ├── event.service.ts     # acesso à API com HttpClient
+│   │   │   └── interest.service.ts  # estado global dos interesses (RF5)
+│   │   ├── validators/
+│   │   │   └── future-date.validator.ts  # validador personalizado de data futura
 │   │   ├── app.config.ts  # providers da aplicação (roteador, HttpClient)
 │   │   ├── app.routes.ts  # definição das rotas
-│   │   └── app.ts         # componente raiz (+ app.html / app.css)
+│   │   └── app.ts         # componente raiz com o cabeçalho (+ app.html / app.css)
 │   ├── index.html
 │   ├── main.ts            # bootstrap da aplicação standalone
 │   └── styles.css         # CSS global
