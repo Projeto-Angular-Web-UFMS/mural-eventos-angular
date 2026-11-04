@@ -129,6 +129,7 @@
   .section .footer { color: #ffd5de; }
 
   svg text { font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+  
 </style>
 </head>
 <body>
@@ -715,23 +716,225 @@ npm start        <span class="c"># terminal 2</span></pre>
   <div class="footer"><span>Angular · Mural de Eventos</span><span>21</span></div>
 </section>
 
-<!-- 22. Quiz -->
+<!-- 22. Quiz — Questão 1 -->
 <section class="slide">
-  <div class="tag">Quiz · 5 min</div>
-  <h1>5 perguntas sobre conceitos</h1>
-  <div class="cols-3" style="grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 36px">
-    <div class="card red"><h2>1</h2><p>Injeção de dependências</p></div>
-    <div class="card red"><h2>2</h2><p>providedIn: 'root'</p></div>
-    <div class="card red"><h2>3</h2><p>signal e computed</p></div>
-    <div class="card red"><h2>4</h2><p>Observable × Promise</p></div>
-    <div class="card red"><h2>5</h2><p>Validação em formulários</p></div>
+  <div class="tag">Quiz · Questão 1 de 5</div>
+  <h1>Injeção de dependências</h1>
+  <p>No Mural, o EventList obtém o serviço com
+    <code>inject(EventService)</code>, em vez de criá-lo
+    com <code>new EventService(...)</code>.
+    Qual é a principal vantagem dessa escolha?</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px">
+    <div class="card"><h2>A</h2><p>A lista carrega mais rápido, porque inject() faz a requisição HTTP antes de o componente aparecer.</p></div>
+    <div class="card"><h2>B</h2><p>O componente deixa de decidir qual implementação usar; assim, dá para trocar o serviço por uma versão com dados fixos em um teste, sem alterar o componente.</p></div>
+    <div class="card"><h2>C</h2><p>É obrigatório pelo TypeScript: sem inject(), o código não compila.</p></div>
+    <div class="card"><h2>D</h2><p>O inject() transforma o serviço em um componente, permitindo usá-lo no template.</p></div>
   </div>
-  <div class="center" style="align-items:center; text-align:center">
-    <p style="font-size:30px"><strong>Acesse pelo link ou QR code que vamos mostrar agora</strong></p>
-    <p class="muted">Nenhuma pergunta é de sintaxe: todas partem do Mural que vocês acabaram de construir.</p>
-  </div>
+
   <div class="footer"><span>Angular · Mural de Eventos</span><span>22</span></div>
 </section>
+
+
+<section class="slide">
+  <div class="tag">Quiz · Resposta 1 de 5</div>
+  <h1>Injeção de dependências</h1>
+
+  <div class="card green" style="margin:24px 0">
+    <h2 style="font-size:30px">Resposta correta: B</h2>
+    <p>O componente não precisa decidir qual implementação
+    do serviço utilizar. O injetor fornece a dependência.</p>
+  </div>
+
+  <h2>Por que essa é a resposta?</h2>
+  <p>Isso reduz o acoplamento e facilita os testes.
+  Podemos substituir o EventService real por um serviço
+  falso com dados fixos, sem modificar o EventList.</p>
+
+  <pre class="sm">providers: [
+  { provide: EventService, useValue: fake }
+]</pre>
+
+  <div class="callout">
+    O componente declara o que precisa;
+    o injetor decide o que entregar.
+  </div>
+</section>
+
+
+<!-- 23. Quiz — Questão 2 -->
+<section class="slide">
+  <div class="tag">Quiz · Questão 2 de 5</div>
+  <h1>Estado compartilhado</h1>
+  <p>O cabeçalho, os cards e a página de detalhe não têm relação de pai e filho. Mesmo assim, ao clicar em "Tenho interesse" em um card, o contador "Meus interesses: N" do cabeçalho muda na hora. Por quê?</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px">
+    <div class="card"><h2>A</h2><p>O card emite um evento com output(), que o Angular repassa automaticamente até o cabeçalho.</p></div>
+    <div class="card"><h2>B</h2><p>O roteador guarda os interesses na URL, e o cabeçalho lê o valor de lá.</p></div>
+    <div class="card"><h2>C</h2><p>Como o InterestService usa providedIn: 'root', existe uma única instância para toda a aplicação: todos os componentes injetam o mesmo objeto, e o estado dele está em um signal que avisa quem o lê.</p></div>
+    <div class="card"><h2>D</h2><p>Cada componente recebe sua própria cópia do serviço, e o Angular sincroniza as cópias a cada clique.</p></div>
+  </div>
+
+  <div class="footer"><span>Angular · Mural de Eventos</span><span>23</span></div>
+</section>
+
+
+<section class="slide">
+  <div class="tag">Quiz · Resposta 2 de 5</div>
+  <h1>Estado compartilhado</h1>
+
+  <div class="card green" style="margin:24px 0">
+    <h2 style="font-size:30px">Resposta correta: C</h2>
+    <p>O InterestService é registrado no injetor raiz,
+    permitindo que os componentes compartilhem
+    a mesma instância.</p>
+  </div>
+
+  <h2>Por que essa é a resposta?</h2>
+  <p>Com providedIn: 'root', o serviço funciona como
+  singleton. Cabeçalho, cards e detalhes utilizam
+  o mesmo objeto.</p>
+
+  <p>Quando um componente altera o signal de interesses,
+  os demais componentes que dependem desse estado
+  são atualizados automaticamente.</p>
+
+  <div class="callout">
+    Um serviço compartilhado permite gerenciar
+    estado global sem passar dados entre componentes.
+  </div>
+</section>
+
+
+<!-- 24. Quiz — Questão 3 -->
+<section class="slide">
+  <div class="tag">Quiz · Questão 3 de 5</div>
+  <h1>Signals: signal e computed</h1>
+  <p>No EventList, a busca é um signal e a lista exibida é um computed que lê os eventos, a busca e a categoria. O que acontece quando o usuário digita uma letra na busca?</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px">
+    <div class="card"><h2>A</h2><p>O Angular faz uma nova requisição GET /eventos com o texto digitado, e a API devolve a lista já filtrada.</p></div>
+    <div class="card"><h2>B</h2><p>É preciso chamar manualmente um método para recalcular a lista; caso contrário, a tela não muda.</p></div>
+    <div class="card"><h2>C</h2><p>O computed é calculado uma única vez, quando o componente é criado, e por isso a lista não muda.</p></div>
+    <div class="card"><h2>D</h2><p>O computed percebe que um signal que ele lê mudou, recalcula a lista filtrada e a tela é atualizada — sem nova requisição à API.</p></div>
+  </div>
+
+  <div class="footer"><span>Angular · Mural de Eventos</span><span>24</span></div>
+</section>
+
+
+<section class="slide">
+  <div class="tag">Quiz · Resposta 3 de 5</div>
+  <h1>Signals: signal e computed</h1>
+
+  <div class="card green" style="margin:24px 0">
+    <h2 style="font-size:30px">Resposta correta: D</h2>
+    <p>O computed acompanha os signals utilizados
+    no cálculo e atualiza o resultado quando
+    suas dependências mudam.</p>
+  </div>
+
+  <h2>Por que essa é a resposta?</h2>
+  <p>Quando o usuário digita na busca, o signal
+  recebe um novo valor. O computed é invalidado
+  e recalcula a lista quando seu resultado é lido.</p>
+
+  <p>A filtragem acontece sobre os eventos
+  já carregados, sem fazer outra requisição HTTP.</p>
+
+  <div class="callout">
+    signal armazena estado;
+    computed deriva valores automaticamente.
+  </div>
+</section>
+
+
+<!-- 25. Quiz — Questão 4 -->
+<section class="slide">
+  <div class="tag">Quiz · Questão 4 de 5</div>
+  <h1>Observables versus Promises</h1>
+  <p>O HttpClient devolve um Observable, e não uma Promise. Qual afirmação descreve corretamente essa diferença no Mural?</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px">
+    <div class="card"><h2>A</h2><p>A requisição só é feita quando alguém se inscreve (subscribe ou toSignal); além disso, o Observable pode ser cancelado e combinado com operadores do RxJS.</p></div>
+    <div class="card"><h2>B</h2><p>A requisição começa no momento em que list() é chamado, mesmo que ninguém se inscreva, igual a uma Promise.</p></div>
+    <div class="card"><h2>C</h2><p>Observables são sempre síncronos; por isso a lista aparece sem a mensagem "Carregando eventos…".</p></div>
+    <div class="card"><h2>D</h2><p>Não há diferença prática: o Angular converte todo Observable em Promise antes de fazer a requisição.</p></div>
+  </div>
+
+  <div class="footer"><span>Angular · Mural de Eventos</span><span>25</span></div>
+</section>
+
+
+<section class="slide">
+  <div class="tag">Quiz · Resposta 4 de 5</div>
+  <h1>Observables versus Promises</h1>
+
+  <div class="card green" style="margin:24px 0">
+    <h2 style="font-size:30px">Resposta correta: A</h2>
+    <p>O Observable do HttpClient inicia a requisição
+    quando existe uma inscrição e permite
+    cancelamento e composição com RxJS.</p>
+  </div>
+
+  <h2>Por que essa é a resposta?</h2>
+  <p>Uma Promise começa sua execução ao ser criada
+  e representa um único resultado futuro.</p>
+
+  <p>O Observable permite trabalhar com fluxos
+  assíncronos, utilizando operadores como
+  map, catchError e switchMap.</p>
+
+  <div class="callout">
+    Observable oferece mais recursos para
+    controlar e combinar operações assíncronas.
+  </div>
+</section>
+
+
+<!-- 26. Quiz — Questão 5 -->
+<section class="slide">
+  <div class="tag">Quiz · Questão 5 de 5</div>
+  <h1>Validação em Reactive Forms</h1>
+  <p>O campo data do cadastro usa dois validadores: Validators.required e o validador personalizado futureDateValidator. Por que o futureDateValidator retorna null quando o campo está vazio?</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px">
+    <div class="card"><h2>A</h2><p>Porque null significa "inválido" para o Angular, e um campo vazio é inválido.</p></div>
+    <div class="card"><h2>B</h2><p>Porque cada validador tem uma única responsabilidade: o campo vazio já é tratado pelo required, e o validador personalizado só verifica se uma data preenchida é futura — assim, cada erro gera uma única mensagem.</p></div>
+    <div class="card"><h2>C</h2><p>Porque o Angular não permite que validadores personalizados retornem erros para campos vazios.</p></div>
+    <div class="card"><h2>D</h2><p>Porque o campo de data do navegador nunca fica vazio, então o caso não importa.</p></div>
+  </div>
+
+  <div class="footer"><span>Angular · Mural de Eventos</span><span>26</span></div>
+</section>
+
+
+<section class="slide">
+  <div class="tag">Quiz · Resposta 5 de 5</div>
+  <h1>Validação em Reactive Forms</h1>
+
+  <div class="card green" style="margin:24px 0">
+    <h2 style="font-size:30px">Resposta correta: B</h2>
+    <p>Cada validador possui uma responsabilidade.
+    O required verifica se o campo está preenchido,
+    enquanto o futureDateValidator verifica
+    se a data informada é futura.</p>
+  </div>
+
+  <h2>Por que essa é a resposta?</h2>
+  <p>No Angular, retornar null significa
+  que a validação passou.</p>
+
+  <p>Quando o campo está vazio, o validador
+  personalizado retorna null porque o required
+  já é responsável por identificar esse erro.</p>
+
+  <div class="callout">
+    Separar responsabilidades evita validações
+    duplicadas e mensagens de erro confusas.
+  </div>
+</section>
+
 
 <!-- 23. Pergunta-chave -->
 <section class="slide">
