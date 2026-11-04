@@ -55,6 +55,16 @@ describe('EventForm', () => {
     );
   });
 
+  it('should build the poster preview while the form is filled', async () => {
+    await fill('#event-title', 'Angular Signals');
+    await fill('#event-category', 'Workshop');
+
+    const preview = element.querySelector('.preview-poster')!;
+    expect(preview.textContent).toContain('Angular Signals');
+    expect(preview.classList).toContain('cat-workshop');
+    expect(preview.querySelector('.stamp')).toBeNull();
+  });
+
   it('should create the event and go back to the list', async () => {
     const navigate = vi.spyOn(TestBed.inject(Router), 'navigateByUrl').mockResolvedValue(true);
     const nextYear = new Date();

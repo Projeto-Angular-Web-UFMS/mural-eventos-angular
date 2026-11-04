@@ -1,93 +1,134 @@
-<h1>Cadastrar evento</h1>
+<div class="container page">
+  <p class="page-kicker">Pregue um cartaz novo no mural</p>
+  <h1 class="page-title">Cadastrar evento</h1>
 
-<form class="form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
-  <div class="field">
-    <label for="event-title">Título</label>
-    <input
-      id="event-title"
-      type="text"
-      formControlName="titulo"
-      [attr.aria-invalid]="showError('titulo')"
-      [attr.aria-describedby]="showError('titulo') ? 'event-title-error' : null"
-    />
-    @if (showError('titulo')) {
-      <p id="event-title-error" class="error">
-        @if (form.controls.titulo.hasError('required')) {
-          Informe o título do evento.
-        } @else {
-          O título deve ter pelo menos 5 caracteres.
+  <div class="compose">
+    <div class="sheet">
+      <form class="form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="field">
+          <label for="event-title">Título</label>
+          <input
+            id="event-title"
+            type="text"
+            formControlName="titulo"
+            [attr.aria-invalid]="showError('titulo')"
+            [attr.aria-describedby]="showError('titulo') ? 'event-title-error' : null"
+          />
+          @if (showError('titulo')) {
+            <p id="event-title-error" class="error">
+              @if (form.controls.titulo.hasError('required')) {
+                Informe o título do evento.
+              } @else {
+                O título deve ter pelo menos 5 caracteres.
+              }
+            </p>
+          }
+        </div>
+
+        <div class="field">
+          <label for="event-description">Descrição (opcional)</label>
+          <textarea id="event-description" rows="3" formControlName="descricao"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="event-date">Data</label>
+          <input
+            id="event-date"
+            type="date"
+            formControlName="data"
+            [attr.aria-invalid]="showError('data')"
+            [attr.aria-describedby]="showError('data') ? 'event-date-error' : null"
+          />
+          @if (showError('data')) {
+            <p id="event-date-error" class="error">
+              @if (form.controls.data.hasError('required')) {
+                Informe a data do evento.
+              } @else {
+                A data deve ser futura.
+              }
+            </p>
+          }
+        </div>
+
+        <div class="field">
+          <label for="event-location">Local</label>
+          <input
+            id="event-location"
+            type="text"
+            formControlName="local"
+            [attr.aria-invalid]="showError('local')"
+            [attr.aria-describedby]="showError('local') ? 'event-location-error' : null"
+          />
+          @if (showError('local')) {
+            <p id="event-location-error" class="error">Informe o local do evento.</p>
+          }
+        </div>
+
+        <div class="field">
+          <label for="event-category">Categoria</label>
+          <select
+            id="event-category"
+            formControlName="categoria"
+            [attr.aria-invalid]="showError('categoria')"
+            [attr.aria-describedby]="showError('categoria') ? 'event-category-error' : null"
+          >
+            <option value="">Selecione uma categoria</option>
+            @for (item of categories; track item) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+          @if (showError('categoria')) {
+            <p id="event-category-error" class="error">Selecione a categoria do evento.</p>
+          }
+        </div>
+
+        @if (submitError()) {
+          <p class="message message-error" role="alert">
+            Não foi possível cadastrar o evento. Verifique se a API está rodando e tente novamente.
+          </p>
         }
-      </p>
-    }
-  </div>
 
-  <div class="field">
-    <label for="event-description">Descrição (opcional)</label>
-    <textarea id="event-description" rows="3" formControlName="descricao"></textarea>
-  </div>
+        <div class="form-actions">
+          <button type="submit" class="button button-accent" [disabled]="submitting()">
+            {{ submitting() ? 'Salvando…' : 'Salvar evento' }}
+          </button>
+          <a routerLink="/" class="button">Cancelar</a>
+        </div>
+      </form>
+    </div>
 
-  <div class="field">
-    <label for="event-date">Data</label>
-    <input
-      id="event-date"
-      type="date"
-      formControlName="data"
-      [attr.aria-invalid]="showError('data')"
-      [attr.aria-describedby]="showError('data') ? 'event-date-error' : null"
-    />
-    @if (showError('data')) {
-      <p id="event-date-error" class="error">
-        @if (form.controls.data.hasError('required')) {
-          Informe a data do evento.
-        } @else {
-          A data deve ser futura.
+    <aside class="form-preview" aria-hidden="true">
+      <p class="preview-label">Prévia do cartaz</p>
+      @let draft = preview();
+      <div class="poster preview-poster" [class]="previewClass()" appTilt>
+        <span class="pin"></span>
+        <div class="poster-band">
+          <span class="poster-date" [class.is-placeholder]="!draft.data"
+            ><span class="poster-day">{{
+              draft.data ? (draft.data | date: 'dd/MM') : 'dd/mm'
+            }}</span
+            ><span class="poster-year">{{
+              draft.data ? (draft.data | date: '/yyyy') : '/aaaa'
+            }}</span></span
+          >
+          <span class="poster-category">{{ draft.categoria || 'Categoria' }}</span>
+        </div>
+        <div class="poster-body">
+          <p class="poster-title" [class.is-placeholder]="!draft.titulo">
+            {{ draft.titulo || 'Título do evento' }}
+          </p>
+          @if (draft.descricao) {
+            <p class="preview-description">{{ draft.descricao }}</p>
+          }
+          <p class="poster-place">{{ draft.local || 'Local do evento' }}</p>
+        </div>
+        @if (ready()) {
+          <span class="stamp">Pronto para pregar</span>
         }
+      </div>
+      <p class="preview-hint">
+        {{ ready() ? 'Tudo certo: é só salvar.' : 'O cartaz se monta enquanto você preenche.' }}
       </p>
-    }
+    </aside>
   </div>
-
-  <div class="field">
-    <label for="event-location">Local</label>
-    <input
-      id="event-location"
-      type="text"
-      formControlName="local"
-      [attr.aria-invalid]="showError('local')"
-      [attr.aria-describedby]="showError('local') ? 'event-location-error' : null"
-    />
-    @if (showError('local')) {
-      <p id="event-location-error" class="error">Informe o local do evento.</p>
-    }
-  </div>
-
-  <div class="field">
-    <label for="event-category">Categoria</label>
-    <select
-      id="event-category"
-      formControlName="categoria"
-      [attr.aria-invalid]="showError('categoria')"
-      [attr.aria-describedby]="showError('categoria') ? 'event-category-error' : null"
-    >
-      <option value="">Selecione uma categoria</option>
-      @for (item of categories; track item) {
-        <option [value]="item">{{ item }}</option>
-      }
-    </select>
-    @if (showError('categoria')) {
-      <p id="event-category-error" class="error">Selecione a categoria do evento.</p>
-    }
-  </div>
-
-  @if (submitError()) {
-    <p class="message message-error" role="alert">
-      Não foi possível cadastrar o evento. Verifique se a API está rodando e tente novamente.
-    </p>
-  }
-
-  <div class="page-title">
-    <button type="submit" class="button" [disabled]="submitting()">
-      {{ submitting() ? 'Salvando…' : 'Salvar evento' }}
-    </button>
-    <a routerLink="/" class="button button-secondary">Cancelar</a>
-  </div>
-</form>
+</div>

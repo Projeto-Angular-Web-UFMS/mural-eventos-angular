@@ -1,10 +1,25 @@
 <header class="header">
   <div class="container header-content">
     <a routerLink="/" class="brand">Mural de Eventos</a>
-    <span class="counter" aria-live="polite">Meus interesses: {{ interests.total() }}</span>
+    <div class="header-actions">
+      <a routerLink="/eventos/novo" class="header-link">+ Cadastrar evento</a>
+      <span class="counter" aria-live="polite"
+        >Meus interesses: <b #count>{{ interests.total() }}</b></span
+      >
+      <button
+        type="button"
+        class="theme-toggle"
+        [attr.aria-pressed]="theme.theme() === 'dark'"
+        (click)="toggleTheme($event)"
+      >
+        <span class="theme-icon" aria-hidden="true"></span>
+        Modo escuro
+      </button>
+    </div>
   </div>
+  <span class="scroll-progress" aria-hidden="true"></span>
 </header>
 
-<main class="container">
+<main>
   <router-outlet />
 </main>

@@ -1,6 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Component, computed, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { map } from 'rxjs';
+import { Tilt } from '../motion/tilt.directive';
 import { EVENT_CATEGORIES, EventCategory } from '../models/course-event';
 import { EventService } from '../services/event.service';
 import { futureDateValidator } from '../validators/future-date.validator';
@@ -9,7 +13,7 @@ type FieldName = 'titulo' | 'descricao' | 'data' | 'local' | 'categoria';
 
 @Component({
   selector: 'app-event-form',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, DatePipe, Tilt],
   templateUrl: './event-form.html',
   styleUrl: './event-form.css',
 })
@@ -33,6 +37,19 @@ export class EventForm {
     }),
     local: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     categoria: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+  });
+
+  protected readonly preview = toSignal(
+    this.form.valueChanges.pipe(map(() => this.form.getRawValue())),
+    { initialValue: this.form.getRawValue() },
+  );
+  protected readonly ready = toSignal(
+    this.form.statusChanges.pipe(map((status) => status === 'VALID')),
+    { initialValue: false },
+  );
+  protected readonly previewClass = computed(() => {
+    const category = this.preview().categoria;
+    return category ? `cat-${category.toLowerCase()}` : 'cat-empty';
   });
 
   protected showError(field: FieldName): boolean {

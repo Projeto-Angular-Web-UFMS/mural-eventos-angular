@@ -120,6 +120,33 @@ git checkout checkpoint-1
 
 ---
 
+## ✨ Extra: branch `layout-plus`
+
+Versão extra, apresentada só no fechamento, que mostra como o mesmo Mural pode ganhar um layout mais dinâmico **sem mudar os requisitos RF1 a RF5**. Ela fica numa branch separada, como pede o seminário, para não interferir na comparação com React e Vue.
+
+| Recurso | Como foi feito |
+| :--- | :--- |
+| Visual "mural de cartazes" | CSS próprio: cartazes coloridos por categoria, levemente tortos, com alfinete e sombra sólida |
+| Modo claro e escuro | `ThemeService` com signal, preferência do sistema e escolha salva; troca com revelação circular a partir do botão (View Transitions API) |
+| Título que entra letra por letra e parallax no hero | GSAP (SplitText + ScrollTrigger) |
+| Faixa de categorias que anda com a rolagem | GSAP ScrollTrigger com `scrub` |
+| Cartazes que aparecem ao rolar | Diretiva `appReveal` com IntersectionObserver |
+| Cartaz que inclina seguindo o mouse | Diretiva `appTilt` com variáveis CSS |
+| Carimbo "Na agenda" e contador que pulsa | Animações CSS e Web Animations API |
+| Cadastro com prévia do cartaz ao vivo | `toSignal` sobre o `valueChanges` do formulário reativo; carimbo "Pronto para pregar" quando o formulário fica válido |
+| Transição entre páginas | `withViewTransitions()` do roteador do Angular |
+
+Acessibilidade: com **movimento reduzido** ativado no sistema, todas as animações são desligadas e a página funciona normalmente; nada se move sozinho, e o foco do teclado é sempre visível.
+
+```bash
+git checkout layout-plus
+npm install
+```
+
+> A única dependência nova é o `gsap` (biblioteca de animação, não de componentes prontos).
+
+---
+
 ## 📂 Estrutura de Pastas do Repositório
 
 ```text

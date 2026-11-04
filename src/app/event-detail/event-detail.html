@@ -1,48 +1,63 @@
-@switch (status()) {
-  @case ('loading') {
-    <p class="message" role="status">Carregando evento…</p>
-  }
-  @case ('not-found') {
-    <div class="message">
-      <h1>Evento não encontrado</h1>
-      <p>O evento procurado não existe ou foi removido.</p>
-      <a routerLink="/">Voltar para a lista de eventos</a>
-    </div>
-  }
-  @case ('error') {
-    <div class="message message-error" role="alert">
-      <p>Não foi possível carregar o evento. Verifique se a API está rodando e tente novamente.</p>
-      <a routerLink="/">Voltar para a lista de eventos</a>
-    </div>
-  }
-  @case ('found') {
-    @if (event(); as event) {
-      <article class="details">
-        <span class="badge">{{ event.categoria }}</span>
-        <h1>{{ event.titulo }}</h1>
-        @if (event.descricao) {
-          <p>{{ event.descricao }}</p>
-        }
-        <dl class="info">
-          <dt>Data</dt>
-          <dd>
-            <time [attr.datetime]="event.data">{{ event.data | date: 'dd/MM/yyyy' }}</time>
-          </dd>
-          <dt>Local</dt>
-          <dd>{{ event.local }}</dd>
-        </dl>
-        <div class="actions">
-          <button
-            type="button"
-            class="button"
-            [class.button-secondary]="interests.hasInterest(event.id)"
-            (click)="interests.toggle(event.id)"
-          >
-            {{ interests.hasInterest(event.id) ? 'Remover interesse' : 'Tenho interesse' }}
-          </button>
-          <a routerLink="/" class="button button-secondary">Voltar</a>
-        </div>
-      </article>
+<div class="container page">
+  @switch (status()) {
+    @case ('loading') {
+      <p class="message loading" role="status">Carregando evento…</p>
+    }
+    @case ('not-found') {
+      <div class="sheet">
+        <p class="page-kicker">Erro 404</p>
+        <h1 class="page-title">Evento não encontrado</h1>
+        <p>O evento procurado não existe ou foi removido.</p>
+        <a routerLink="/" class="button button-primary">Voltar para a lista de eventos</a>
+      </div>
+    }
+    @case ('error') {
+      <div class="message message-error" role="alert">
+        <p>
+          Não foi possível carregar o evento. Verifique se a API está rodando e tente novamente.
+        </p>
+        <a routerLink="/">Voltar para a lista de eventos</a>
+      </div>
+    }
+    @case ('found') {
+      @if (event(); as event) {
+        <article class="poster detail" [class]="'cat-' + event.categoria.toLowerCase()">
+          <span class="pin" aria-hidden="true"></span>
+          <div class="poster-band">
+            <time class="poster-date" [attr.datetime]="event.data"
+              ><span class="poster-day">{{ event.data | date: 'dd/MM' }}</span
+              ><span class="poster-year">{{ event.data | date: '/yyyy' }}</span></time
+            >
+            <span class="poster-category">{{ event.categoria }}</span>
+          </div>
+          <div class="detail-body">
+            <h1 class="detail-title">{{ event.titulo }}</h1>
+            @if (event.descricao) {
+              <p class="detail-description">{{ event.descricao }}</p>
+            }
+            <dl class="info">
+              <dt>Data</dt>
+              <dd>{{ event.data | date: 'dd/MM/yyyy' }}</dd>
+              <dt>Local</dt>
+              <dd>{{ event.local }}</dd>
+            </dl>
+            <div class="actions">
+              <button
+                type="button"
+                class="button"
+                [class.button-primary]="interests.hasInterest(event.id)"
+                (click)="interests.toggle(event.id)"
+              >
+                {{ interests.hasInterest(event.id) ? 'Remover interesse' : 'Tenho interesse' }}
+              </button>
+              <a routerLink="/" class="button">Voltar</a>
+            </div>
+          </div>
+          @if (interests.hasInterest(event.id)) {
+            <span class="stamp" aria-hidden="true">Na agenda</span>
+          }
+        </article>
+      }
     }
   }
-}
+</div>

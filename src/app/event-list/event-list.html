@@ -1,49 +1,76 @@
-<div class="page-title">
-  <h1>Eventos do curso</h1>
-  <a routerLink="/eventos/novo" class="button">Cadastrar evento</a>
-</div>
-
-<div class="filters">
-  <div class="field">
-    <label for="search">Buscar por título</label>
-    <input
-      id="search"
-      type="search"
-      #searchInput
-      [value]="search()"
-      (input)="search.set(searchInput.value)"
-    />
+<section class="hero">
+  <div class="container hero-grid">
+    <h1 class="hero-title">O que <span class="hero-highlight">rola</span><br />no curso</h1>
+    <div class="hero-aside">
+      <p class="hero-caption">
+        Palestras, workshops, minicursos e hackathons. Marque os que você não quer perder.
+      </p>
+      <div class="hero-actions">
+        <a routerLink="/eventos/novo" class="button button-accent">Cadastrar evento</a>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <label for="category">Categoria</label>
-    <select
-      id="category"
-      #categorySelect
-      [value]="category()"
-      (change)="category.set(categorySelect.value)"
-    >
-      <option value="">Todas</option>
-      @for (item of categories; track item) {
-        <option [value]="item">{{ item }}</option>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      @for (item of marqueeItems; track $index) {
+        <span>{{ item }} ✶</span>
       }
-    </select>
+      @for (item of marqueeItems; track $index) {
+        <span>{{ item }} ✶</span>
+      }
+    </div>
   </div>
-</div>
+</section>
 
-@if (loading()) {
-  <p class="message" role="status">Carregando eventos…</p>
-} @else if (loadError()) {
-  <p class="message message-error" role="alert">
-    Não foi possível carregar os eventos. Verifique se a API está rodando (npm run api) e recarregue
-    a página.
-  </p>
-} @else {
-  <div class="grid">
-    @for (event of filteredEvents(); track event.id) {
-      <app-event-card [event]="event" />
-    } @empty {
-      <p class="message">Nenhum evento encontrado</p>
-    }
+<section class="container" aria-labelledby="events-heading">
+  <h2 id="events-heading" class="visually-hidden">Eventos do curso</h2>
+
+  <div class="filters">
+    <div class="field">
+      <label for="search">Buscar por título</label>
+      <input
+        id="search"
+        type="search"
+        #searchInput
+        [value]="search()"
+        (input)="search.set(searchInput.value)"
+      />
+    </div>
+
+    <div class="field">
+      <label for="category">Categoria</label>
+      <select
+        id="category"
+        #categorySelect
+        [value]="category()"
+        (change)="category.set(categorySelect.value)"
+      >
+        <option value="">Todas</option>
+        @for (item of categories; track item) {
+          <option [value]="item">{{ item }}</option>
+        }
+      </select>
+    </div>
   </div>
-}
+
+  @if (loading()) {
+    <div class="board">
+      <p class="message loading" role="status">Carregando eventos…</p>
+    </div>
+  } @else if (loadError()) {
+    <div class="board">
+      <p class="message message-error" role="alert">
+        Não foi possível carregar os eventos. Verifique se a API está rodando (npm run api) e
+        recarregue a página.
+      </p>
+    </div>
+  } @else {
+    <div class="board">
+      @for (event of filteredEvents(); track event.id) {
+        <app-event-card appReveal [event]="event" [style.--i]="$index % 3" />
+      } @empty {
+        <p class="message">Nenhum evento encontrado</p>
+      }
+    </div>
+  }
+</section>
