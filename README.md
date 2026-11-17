@@ -40,7 +40,7 @@ Siga o passo a passo abaixo para configurar e executar o projeto em sua máquina
 git clone https://github.com/Projeto-Angular-Web-UFMS/mural-eventos-angular.git
 cd mural-eventos-angular
 ```
-> Para a oficina prática, troque para a branch base com `git checkout start` antes de instalar.
+> Para a oficina prática, troque para a branch base com `git checkout start-1.0` antes de instalar.
 
 ### 2. Instalar as Dependências
 ```bash
@@ -82,14 +82,15 @@ O repositório está organizado em branches para guiar a oficina prática:
 
 * `main`: Solução final completa com todos os requisitos (RF1 a RF5).
 * `live-coding`: Ponto de partida para a demonstração ao vivo (RF1 e RF2).
-* `start`: **Base da oficina prática** para a turma (RF1 e RF2 prontos, componentes de RF3 a RF5 criados).
+* `start`: Resultado do live coding (RF1 e RF2 prontos, componentes de RF3 a RF5 criados).
+* `start-1.0`: **Base da oficina prática** para a turma. Tem RF1 e RF2 prontos e quase todo o código do cadastro (RF3). A turma completa só os trechos de Angular marcados com `TODO`, seguindo a pasta `oficina/`.
 * `checkpoint-1`: Solução do Formulário Reativo de Cadastro (RF3).
 * `checkpoint-2`: Solução da Página de Detalhe com Rota Dinâmica (RF4).
 * `checkpoint-3`: Solução do Gerenciamento de Interesses com Signal Global (RF5).
 
 Para alternar para a branch inicial da oficina, utilize:
 ```bash
-git checkout start
+git checkout start-1.0
 ```
 
 ---
