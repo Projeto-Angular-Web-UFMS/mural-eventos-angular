@@ -84,6 +84,7 @@ O repositório está organizado em branches para guiar a oficina prática:
 * `live-coding`: Ponto de partida para a demonstração ao vivo (RF1 e RF2).
 * `start`: **Base da oficina prática** para a turma (RF1 e RF2 prontos, componentes de RF3 a RF5 criados).
 * `checkpoint-1`: Solução do Formulário Reativo de Cadastro (RF3).
+* `checkpoint-1.2`: **Base da parte 2 da oficina** (RF4). Tem o cadastro (RF3) pronto e quase todo o código do detalhe; a turma gera o componente com a CLI e completa os `TODO`, seguindo a pasta `oficina/`.
 * `checkpoint-2`: Solução da Página de Detalhe com Rota Dinâmica (RF4).
 * `checkpoint-3`: Solução do Gerenciamento de Interesses com Signal Global (RF5).
 
