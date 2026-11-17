@@ -15,6 +15,7 @@ type DetailStatus = 'loading' | 'found' | 'not-found' | 'error';
 })
 export class EventDetail implements OnInit {
   private readonly eventService = inject(EventService);
+  // TODO 2: injete o InterestService (e importe-o no topo do arquivo).
 
   readonly id = input.required<string>();
 

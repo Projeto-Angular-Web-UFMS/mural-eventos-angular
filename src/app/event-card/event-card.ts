@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CourseEvent } from '../models/course-event';
 
@@ -10,5 +10,7 @@ import { CourseEvent } from '../models/course-event';
   styleUrl: './event-card.css',
 })
 export class EventCard {
+  // TODO 2: injete o InterestService (e importe-o no topo do arquivo).
+
   readonly event = input.required<CourseEvent>();
 }

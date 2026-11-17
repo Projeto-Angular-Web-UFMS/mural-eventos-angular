@@ -85,6 +85,7 @@ O repositório está organizado em branches para guiar a oficina prática:
 * `start`: **Base da oficina prática** para a turma (RF1 e RF2 prontos, componentes de RF3 a RF5 criados).
 * `checkpoint-1`: Solução do Formulário Reativo de Cadastro (RF3).
 * `checkpoint-2`: Solução da Página de Detalhe com Rota Dinâmica (RF4).
+* `checkpoint-2.3`: **Base da parte 3 da oficina** (RF5). Tem o cadastro e o detalhe (RF3 e RF4) prontos e quase todo o código dos interesses; a turma gera o serviço com a CLI e completa os `TODO`, seguindo a pasta `oficina/`.
 * `checkpoint-3`: Solução do Gerenciamento de Interesses com Signal Global (RF5).
 
 Para alternar para a branch inicial da oficina, utilize:
