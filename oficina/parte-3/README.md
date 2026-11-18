@@ -2,6 +2,8 @@
 
 Ao final desta parte, cada card e a página de detalhe têm um botão que alterna entre "Tenho interesse" e "Remover interesse". O cabeçalho mostra "Meus interesses: N", que muda na hora, e o estado continua ao navegar entre a lista e o detalhe.
 
+O resumo de uma página, que fica projetado durante a oficina, está em [`oficina-parte-3.pdf`](oficina-parte-3.pdf).
+
 **Já está pronto:**
 
 - `oficina/parte-3/interest.service.ts` · o serviço com o estado global: a lista de ids em um `signal`, o `total` (`computed`) e o `hasInterest(id)`. Falta o `toggle` (TODO 1).
