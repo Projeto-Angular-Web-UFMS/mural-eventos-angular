@@ -21,7 +21,7 @@ export class EventForm {
   protected readonly submitting = signal(false);
   protected readonly submitError = signal(false);
 
-  // TODO 1: coloque os validadores de cada campo dentro dos colchetes de "validators".
+  // TODO 3: coloque as regras de cada campo dentro dos colchetes de "validators".
   protected readonly form = new FormGroup({
     titulo: new FormControl('', { nonNullable: true, validators: [] }),
     descricao: new FormControl('', { nonNullable: true }),
@@ -46,6 +46,6 @@ export class EventForm {
     this.submitting.set(true);
     this.submitError.set(false);
 
-    // TODO 2: cadastre o evento com o serviço e, no sucesso, volte para a lista.
+    // TODO 5: cadastre o evento com o serviço e, no sucesso, volte para a lista.
   }
 }

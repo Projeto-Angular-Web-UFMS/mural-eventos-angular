@@ -1,29 +1,29 @@
 <h1>Cadastrar evento</h1>
 
-<form class="form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+<!-- TODO 1: ligue o <form> ao FormGroup "form" da classe e o envio ao método submit(). -->
+<form class="form" novalidate>
   <div class="field">
     <label for="event-title">Título</label>
+    <!-- TODO 1: ligue cada campo ao seu FormControl (titulo, descricao, data, local, categoria). -->
     <input
       id="event-title"
       type="text"
-      formControlName="titulo"
       [attr.aria-invalid]="showError('titulo')"
       [attr.aria-describedby]="showError('titulo') ? 'event-title-error' : null"
     />
-    @if (showError('titulo')) {
-      <p id="event-title-error" class="error">
-        @if (form.controls.titulo.hasError('required')) {
-          Informe o título do evento.
-        } @else {
-          O título deve ter pelo menos 5 caracteres.
-        }
-      </p>
-    }
+    <!-- TODO 4: mostre esta mensagem só quando showError('titulo') for verdadeiro. -->
+    <p id="event-title-error" class="error">
+      @if (form.controls.titulo.hasError('required')) {
+        Informe o título do evento.
+      } @else {
+        O título deve ter pelo menos 5 caracteres.
+      }
+    </p>
   </div>
 
   <div class="field">
     <label for="event-description">Descrição (opcional)</label>
-    <textarea id="event-description" rows="3" formControlName="descricao"></textarea>
+    <textarea id="event-description" rows="3"></textarea>
   </div>
 
   <div class="field">
@@ -31,19 +31,17 @@
     <input
       id="event-date"
       type="date"
-      formControlName="data"
       [attr.aria-invalid]="showError('data')"
       [attr.aria-describedby]="showError('data') ? 'event-date-error' : null"
     />
-    @if (showError('data')) {
-      <p id="event-date-error" class="error">
-        @if (form.controls.data.hasError('required')) {
-          Informe a data do evento.
-        } @else {
-          A data deve ser futura.
-        }
-      </p>
-    }
+    <!-- TODO 4 -->
+    <p id="event-date-error" class="error">
+      @if (form.controls.data.hasError('required')) {
+        Informe a data do evento.
+      } @else {
+        A data deve ser futura.
+      }
+    </p>
   </div>
 
   <div class="field">
@@ -51,31 +49,25 @@
     <input
       id="event-location"
       type="text"
-      formControlName="local"
       [attr.aria-invalid]="showError('local')"
       [attr.aria-describedby]="showError('local') ? 'event-location-error' : null"
     />
-    @if (showError('local')) {
-      <p id="event-location-error" class="error">Informe o local do evento.</p>
-    }
+    <!-- TODO 4 -->
+    <p id="event-location-error" class="error">Informe o local do evento.</p>
   </div>
 
   <div class="field">
     <label for="event-category">Categoria</label>
     <select
       id="event-category"
-      formControlName="categoria"
       [attr.aria-invalid]="showError('categoria')"
       [attr.aria-describedby]="showError('categoria') ? 'event-category-error' : null"
     >
       <option value="">Selecione uma categoria</option>
-      @for (item of categories; track item) {
-        <option [value]="item">{{ item }}</option>
-      }
+      <!-- TODO 2: crie uma <option> para cada item de "categories". -->
     </select>
-    @if (showError('categoria')) {
-      <p id="event-category-error" class="error">Selecione a categoria do evento.</p>
-    }
+    <!-- TODO 4 -->
+    <p id="event-category-error" class="error">Selecione a categoria do evento.</p>
   </div>
 
   @if (submitError()) {

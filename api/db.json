@@ -31,6 +31,14 @@
       "data": "2027-03-15",
       "local": "Laboratório 1",
       "categoria": "Minicurso"
+    },
+    {
+      "titulo": "Fim do tema de Angular",
+      "data": "2026-11-19",
+      "local": "Em casa",
+      "categoria": "Palestra",
+      "id": "CDMdUoywTW8"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
