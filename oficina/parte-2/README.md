@@ -2,6 +2,8 @@
 
 Ao final desta parte, clicar no título de um card abre a página `/eventos/:id` com todos os dados do evento, sem recarregar a página. O link "Voltar" leva de volta para a lista, e um id que não existe (por exemplo `/eventos/999`) mostra "Evento não encontrado".
 
+O resumo de uma página, que fica projetado durante a oficina, está em [`oficina-parte-2.pdf`](oficina-parte-2.pdf).
+
 **Já está pronto:**
 
 - `src/app/services/event.service.ts` · o método `get(id)`, que busca um evento na API (`GET /eventos/:id`).
