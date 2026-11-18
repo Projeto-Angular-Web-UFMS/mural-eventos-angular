@@ -31,7 +31,11 @@
           <dt>Local</dt>
           <dd>{{ event.local }}</dd>
         </dl>
-        <a routerLink="/" class="button button-secondary">Voltar</a>
+        <div class="actions">
+          <!-- TODO 4: o mesmo botão do card, usando event.id. -->
+          <button type="button" class="button">Tenho interesse</button>
+          <a routerLink="/" class="button button-secondary">Voltar</a>
+        </div>
       </article>
     }
   }

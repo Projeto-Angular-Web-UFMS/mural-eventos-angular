@@ -4,7 +4,7 @@ import { Injectable, computed, signal } from '@angular/core';
 export class InterestService {
   private readonly interestedIds = signal<string[]>([]);
 
-  readonly total = computed(() => this.interestedIds().length);
+  // TODO 1: crie o "total", um computed com a quantidade de ids da lista.
 
   hasInterest(id: string): boolean {
     return this.interestedIds().includes(id);

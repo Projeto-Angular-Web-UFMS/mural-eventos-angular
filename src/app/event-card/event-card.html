@@ -1,5 +1,5 @@
 <article class="card">
-  <h2>
+  <h2 [id]="'event-' + event().id + '-title'">
     <a [routerLink]="['/eventos', event().id]">{{ event().titulo }}</a>
   </h2>
   <span class="badge">{{ event().categoria }}</span>
@@ -7,4 +7,8 @@
     <time [attr.datetime]="event().data">{{ event().data | date: 'dd/MM/yyyy' }}</time>
   </p>
   <p>{{ event().local }}</p>
+  <!-- TODO 4: ao clicar, alterne o interesse; o texto e a classe button-secondary mudam se já houver interesse. -->
+  <button type="button" class="button" [attr.aria-describedby]="'event-' + event().id + '-title'">
+    Tenho interesse
+  </button>
 </article>
