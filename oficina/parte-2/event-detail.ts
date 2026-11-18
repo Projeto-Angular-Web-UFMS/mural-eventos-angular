@@ -1,14 +1,14 @@
 import { DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, inject, input, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { CourseEvent } from '../models/course-event';
 import { EventService } from '../services/event.service';
 
 type DetailStatus = 'loading' | 'found' | 'not-found' | 'error';
 
 @Component({
-  imports: [DatePipe, RouterLink],
+  // TODO 4: o link do Angular (RouterLink) também precisa entrar nesta lista.
+  imports: [DatePipe],
   selector: 'app-event-detail',
   styleUrl: './event-detail.css',
   templateUrl: './event-detail.html',

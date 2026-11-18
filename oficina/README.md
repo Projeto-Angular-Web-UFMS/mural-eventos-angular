@@ -4,4 +4,4 @@ O seminário é sobre Angular, então o HTML, o CSS e boa parte do código já e
 
 | Parte | Requisito | Arquivos a completar | Passo a passo | Resumo de tela | Solução |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 2 | RF4 · Ver detalhe | `src/app/app.routes.ts` e `src/app/event-detail/event-detail.ts` | `parte-2/README.md` | `parte-2/oficina-parte-2.pdf` | `checkpoint-2` |
+| 2 | RF4 · Ver detalhe | `src/app/app.routes.ts`, `event-detail.ts` e `event-detail.html` | `parte-2/README.md` | `parte-2/oficina-parte-2.pdf` | `checkpoint-2` |
