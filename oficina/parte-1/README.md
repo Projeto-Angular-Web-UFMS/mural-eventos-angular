@@ -2,6 +2,8 @@
 
 Quase tudo já está pronto: o HTML do formulário, o validador de data futura (`src/app/validators/future-date.validator.ts`) e o método `create` do `EventService`. Vocês completam os **dois `TODO`** do arquivo `src/app/event-form/event-form.ts`.
 
+O resumo de uma página, que fica projetado durante a oficina, está em [`oficina-parte-1.pdf`](oficina-parte-1.pdf).
+
 Abra `http://localhost:4200/eventos/novo`: o formulário já aparece, mas ainda aceita tudo e não salva nada.
 
 ## TODO 1 · Validadores
