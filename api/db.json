@@ -31,15 +31,6 @@
       "data": "2027-03-15",
       "local": "Laboratório 1",
       "categoria": "Minicurso"
-    },
-    {
-      "titulo": "AAAAAA",
-      "descricao": "dafda",
-      "data": "2026-11-20",
-      "local": "aqui",
-      "categoria": "Palestra",
-      "id": "rS9Aiiimr6c"
     }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }
